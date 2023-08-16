@@ -1,0 +1,62 @@
+<app-header [getLoginStatus]="login"></app-header>
+<section class="movie-container container text-light">
+ 
+  <div class="row p-3 g-3 gx-md-5 ">
+    <div class="img col-md-3">
+      <div>
+        <img [src]="image_url" [alt]="movie.title" class="img-fluid rounded-start">
+      </div>
+      <div class="d-flex justify-content-center mt-3">
+    
+          <button mat-raised-button id="play-btn" (click)="openPlayVideo()">
+            <mat-icon class="material-symbols-outlined" >
+              play_circle
+            </mat-icon>   
+        Play trailer
+        </button>
+      
+      </div>
+
+      <div class="button mt-3">
+        <div class="button-flex-container">
+          <div class="btn-container">
+            <button mat-fab aria-label="icon button with a heart icon" matTooltip="Add to favourite" class="icon-btn"
+              (click)="addMovieToFavourite()">
+              <mat-icon color="warn" class="icon">favorite</mat-icon>
+            </button>
+          </div>
+
+
+          <div class="btn-container">
+            <button mat-fab aria-label=" icon button with a bookmark icon" matTooltip="Add to watch later"
+              class="icon-btn" (click)="addToWatchLater()">
+              <mat-icon color="primary">bookmark</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content col-md-9">
+
+      <h1 class="title fw-bold">{{movie.title}}</h1>
+      <h4>Language : {{movie.original_language}}</h4>
+      <div class="sub-content">
+        <h5 style="display: inline;">{{movie.release_date}}</h5>
+        <span *ngFor="let genre of movie.genres">{{genre.name}}</span>
+      </div>
+      <h5>{{movie.runtime}} mins</h5>
+      <p id="overwiew">{{movie.overview}}</p>
+
+    </div>
+  </div>
+</section>
+<div>
+<section class="container mt-5">
+  <div class="row">
+    <h3 class="fw-bold">Top rated</h3>
+    <div class="col-sm-6 col-md-3 mt-0 mb-2" *ngFor="let movie of popularMovies">
+      <app-popular-movies [popularMovie]="movie"></app-popular-movies>
+    </div>
+  </div>
+</section>
+</div>

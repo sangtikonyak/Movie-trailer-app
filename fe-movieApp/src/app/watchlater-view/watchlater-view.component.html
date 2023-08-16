@@ -1,0 +1,19 @@
+
+<div class="card text-light ">
+    <a routerLink="../movie-details/{{movie.movieId}}"><img class="card-img-top" [src]="url" alt="Card image cap"></a>
+     <div class="card-body">
+        <div style="height: 80px;">
+       <p class="card-title " style="font-weight: 500;">{{movie.movieName}}</p>
+       <span >{{movie.yearOfRelease}}</span>
+    </div>
+       <div>
+        <mat-icon class=" nav-link " style="float: right;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">more_vert</mat-icon>
+        <ul class="dropdown-menu dropdown-menu-dark">
+          <li><a class="dropdown-item" role="button" (click)="deleteMovie()">Remove favourite</a></li>
+        </ul>
+       </div>
+    
+     </div>
+    
+   </div>
+

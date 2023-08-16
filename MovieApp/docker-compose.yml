@@ -1,0 +1,104 @@
+version: "3.9"
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq-container
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - movie-app
+    restart: always
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/mnesia
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+  mysql-service:
+    image: mysql:latest
+    container_name: mysql-container
+    networks:
+      - movie-app
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+  mongodb-service:
+    image: mongo:latest
+    container_name: mongodb-container
+    ports:
+      - "27017:27017"
+    networks:
+      - movie-app
+
+  watch-later-service:
+    container_name: watch-later-container
+    networks:
+      - movie-app
+    ports:
+      - "8081:8081"
+    build: WatchLater/
+    depends_on:
+      - mongodb-service
+    restart: always
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq-container
+
+  eureka-service:
+    container_name: eureka-service
+    ports:
+      - "8761:8761"
+    networks:
+      - movie-app
+    build: EurekaServer/
+
+  api-gateway:
+    container_name: api-gateway-container
+    networks:
+      - movie-app
+    ports:
+      - "9000:9000"
+    build: ApiGateway/
+
+  notification-service:
+    container_name: notification-container
+    networks:
+      - movie-app
+    ports:
+      - "8082:8082"
+    build: Notification/
+    depends_on:
+      - mongodb-service
+    restart: always
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq-container
+
+  user-authentication-service:
+    container_name: user-authentication-container
+    networks:
+      - movie-app
+    ports:
+      - "8080:8080"
+    build: UserAuthenticationService/
+    depends_on:
+      - mysql-service
+    restart: always
+
+  favourite-service:
+    container_name: favourite-container
+    networks:
+      - movie-app
+    ports:
+      - "8085:8085"
+    build: FavouriteMovieService/
+    depends_on:
+      - mongodb-service
+    restart: always
+
+networks:
+  movie-app:
+    driver: bridge

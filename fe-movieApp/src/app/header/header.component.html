@@ -1,0 +1,39 @@
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 fixed-top">
+  <div class="container-fluid ">
+    <button class="navbar-toggler ms-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class=d-flex id="form">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchword">
+      <button class="btn btn-outline-light btn-sm" (click)="searchThis()">Search</button>
+    </div>
+  
+    <div class="collapse navbar-collapse "id="navbarTogglerDemo03">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="margin-right: 100px;" id="links">
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" routerLink="" routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item"> 
+          <a class="nav-link " type="button" (click)="goToFavourite()" routerLinkActive="active">Favourite Movies</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Watch Later
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" type="button" (click)="goToWatchlater()" routerLinkActive="active">Not watced </a></li>
+            <li><a class="dropdown-item" type="button" (click)="goToNotification()" routerLinkActive="active">Watched </a></li>
+          </ul>
+        </li>
+        <li>
+        <button type="button" class="log-btn btn btn-primary btn-sm d-inline " (click)="openDialog()" *ngIf="!login">Login</button>
+        <button type="button" class="log-btn btn btn-sm btn-sm d-inline " (click)="logout()" style="background-color: rgb(207, 144, 26);"*ngIf="login" >logout</button>
+      </li>
+      </ul>
+      
+    </div>
+    
+  </div>
+</nav>

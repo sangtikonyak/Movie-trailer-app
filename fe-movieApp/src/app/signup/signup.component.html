@@ -1,0 +1,86 @@
+
+<mat-dialog-content class="mt-4">
+  <mat-card class="login-card text-light">
+
+    <section class="text-center">
+      <div class="card-body">
+
+        <div class="row d-flex justify-content-center flex-nowrap">
+          <div class="col-10">
+            <h2 class="fw-bold">Sign up now</h2>
+            <form (ngSubmit)="signUpUser(signUpForm)" [formGroup]="signUpForm">
+
+              <div class="row">
+                <div class="col-6">
+                  <mat-form-field class="example-form" appereance="fill">
+                    <mat-label>User Name</mat-label>
+                    <input matInput type="text" name="userName" formControlName="userName" />
+                    <mat-error *ngIf="userName?.errors?.['required']">
+                      User Name Required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-6">
+                  <mat-form-field class="example-form" appereance="fill">
+                    <mat-label>Mobile Number</mat-label>
+                    <input matInput type="text" name="mobileNo" formControlName="mobileNo" />
+                    <mat-error *ngIf="mobileNo?.errors?.['required']">
+                      Mobile Number Required
+                    </mat-error>
+                    <mat-error *ngIf="mobileNo?.errors?.['pattern']">
+                      Mobile Number Invalid
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Email input -->
+              <mat-form-field class="example-form" appereance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput type="text" name="email" formControlName="email" />
+                <mat-error *ngIf="email?.errors?.['required']">
+                  Email Required
+                </mat-error>
+                <mat-error *ngIf="email?.errors?.['pattern']">
+                  Invalid Email
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Password input -->
+              <div class="row">
+                <div class="col">
+
+                  <mat-form-field class="example-form" appereance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" name="password" id="password" formControlName="password" />
+                    <mat-error *ngIf="password?.errors?.['required']">
+                      Password Required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col">
+                  <mat-form-field class="example-form" appereance="fill">
+                    <mat-label>Confirm Password</mat-label>
+                    <input matInput type="text" name="confirmPassword" formControlName="confirmPassword" />
+                    <mat-error *ngIf="confirmPassword?.errors?.['required']">
+                      Confirm password required
+                    </mat-error>
+                    <div *ngIf="signUpForm.errors?.['mustMatch']==false">
+                      Passowrd and ConfirmPassword is not matching..
+                    </div>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary btn-block mb-4">
+                Sign up
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </mat-card>
+</mat-dialog-content>

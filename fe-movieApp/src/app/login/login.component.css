@@ -1,0 +1,13 @@
+.mat-mdc-dialog-content {
+    max-height: 100vh;
+    
+}
+::ng-deep .mat-mdc-dialog-container {
+    --mdc-dialog-container-color: rgba(32, 34, 33, 0.993);
+  }
+.login-card{
+    border-radius: 1rem;
+    background-color:rgba(116, 115, 89, 0.993)
+    /* box-shadow: 2px 3px 1px 0px rgb(209, 144, 64); */
+    
+  }

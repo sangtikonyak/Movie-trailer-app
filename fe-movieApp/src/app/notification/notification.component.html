@@ -1,0 +1,10 @@
+<app-header (searchcriteria)="searchThis($event)"></app-header>
+<section class="container">
+    <div class="row d-flex" >
+        <div class="column col-3 col-md-2" *ngFor="let movie of movies">
+       
+  <app-notification-view [movie]="movie" (notificationMovies)="getMovieList($event)"></app-notification-view>
+
+        </div>
+    </div>
+</section>

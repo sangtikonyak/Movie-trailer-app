@@ -1,0 +1,11 @@
+<app-header (searchcriteria)="searchThis($event)"></app-header>
+<section class="container">
+    <div class="row d-flex" >
+        
+        <div class="column col-3 col-md-2" *ngFor="let movie of movies">
+       
+  <app-favourite-view [movie]="movie" (favMovies)="getMovieList($event)"></app-favourite-view>
+
+        </div>
+    </div>
+</section>
